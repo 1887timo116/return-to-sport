@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Return to Sport</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#111827">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- iPhone / iPad -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default">
+
+<meta
+    name="apple-mobile-web-app-title"
+    content="Return to Sport">
+
+<link
+    rel="apple-touch-icon"
+    href="icons/icon-192.png">
+
+</head>
+
+<body>
+
+<header>
+    <h1>Return to Sport</h1>
+    <p>12-Wochen Trainingsplan · Fußball & Tennis</p>
+
+    <nav>
+        <button class="nav-button active" data-page="planPage">
+            Trainingsplan
+        </button>
+
+        <button class="nav-button" data-page="dashboardPage">
+            Dashboard
+        </button>
+
+        <button class="nav-button" data-page="historyPage">
+            Verlauf
+        </button>
+    </nav>
+</header>
+
+
+<main>
+
+<!-- ============================= -->
+<!-- TRAININGSPLAN -->
+<!-- ============================= -->
+
+<section id="planPage" class="page active">
+
+    <section class="week-navigation">
+
+        <button id="previousWeek" class="round-button">
+            ←
+        </button>
+
+        <div>
+            <small>TRAININGSWOCHE</small>
+
+            <h2 id="weekTitle"></h2>
+
+            <p id="phaseTitle" class="phase"></p>
+        </div>
+
+        <button id="nextWeek" class="round-button">
+            →
+        </button>
+
+    </section>
+
+
+    <section class="phase-info">
+
+        <h3 id="phaseHeading"></h3>
+
+        <p id="phaseDescription"></p>
+
+    </section>
+
+
+    <section class="progress-container">
+
+        <div class="progress-info">
+
+            <span>Wochenfortschritt</span>
+
+            <span id="progressText"></span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                id="progressFill"
+                class="progress-fill">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+<!-- WOCHENÜBERSICHT -->
+<!-- ============================= -->
+
+<section class="weekly-overview">
+
+    <div class="weekly-overview-heading">
+        <div>
+            <small>WOCHENPLAN</small>
+            <h2>Deine Trainingswoche</h2>
+        </div>
+
+        <span id="weeklyOverviewPhase"></span>
+    </div>
+
+    <div id="weeklyCalendar" class="weekly-calendar"></div>
+
+</section>
+
+
+<h2 class="training-detail-heading">
+    Trainingsdetails
+</h2>
+
+<section
+    id="trainingContainer"
+    class="training-grid">
+</section>
+
+
+    <section class="knee-info">
+
+        <h2>Knie-Check</h2>
+
+        <div class="knee-grid">
+
+            <div class="knee-box green">
+
+                <strong>0–2 / 10</strong>
+
+                <p>
+                    Keine oder geringe Beschwerden.
+                    Bei guter Reaktion kann die Belastung
+                    weiter gesteigert werden.
+                </p>
+
+            </div>
+
+
+            <div class="knee-box yellow">
+
+                <strong>3–4 / 10</strong>
+
+                <p>
+                    Belastung zunächst halten
+                    oder gegebenenfalls reduzieren.
+                </p>
+
+            </div>
+
+
+            <div class="knee-box red">
+
+                <strong>Deutliche Beschwerden</strong>
+
+                <p>
+                    Belastung reduzieren und bei
+                    anhaltenden Beschwerden abklären lassen.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+
+<!-- ============================= -->
+<!-- DASHBOARD -->
+<!-- ============================= -->
+
+<section id="dashboardPage" class="page">
+
+    <div class="dashboard-heading">
+
+        <div>
+            <small>DEIN FORTSCHRITT</small>
+            <h2>Return-to-Sport Dashboard</h2>
+        </div>
+
+        <div id="dashboardStatus" class="status-badge">
+            Aufbauphase
+        </div>
+
+    </div>
+
+
+    <!-- KPIs -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <span>Trainings</span>
+
+            <strong id="statTrainings">
+                0
+            </strong>
+
+            <small>absolviert</small>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>Laufdistanz</span>
+
+            <strong id="statDistance">
+                0 km
+            </strong>
+
+            <small>gesamt</small>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>Ø Belastung</span>
+
+            <strong id="statEffort">
+                –
+            </strong>
+
+            <small>von 10</small>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>Ø Knieschmerz</span>
+
+            <strong id="statPain">
+                –
+            </strong>
+
+            <small>nach Training</small>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LAUFENTWICKLUNG -->
+
+    <section class="dashboard-card">
+
+        <div class="card-heading">
+
+            <div>
+                <small>RUNNING</small>
+                <h3>Laufentwicklung</h3>
+            </div>
+
+            <span>
+                Pace · min/km
+            </span>
+
+        </div>
+
+        <div
+            id="paceChart"
+            class="chart">
+        </div>
+
+    </section>
+
+
+
+    <!-- KNIE -->
+
+    <section class="dashboard-card">
+
+        <div class="card-heading">
+
+            <div>
+                <small>BELASTUNGSREAKTION</small>
+                <h3>Knieverlauf</h3>
+            </div>
+
+            <span>
+                Schmerz 0–10
+            </span>
+
+        </div>
+
+        <div
+            id="painChart"
+            class="chart">
+        </div>
+
+    </section>
+
+
+
+    <!-- KRAFT -->
+
+    <section class="dashboard-card">
+
+        <div class="card-heading">
+
+            <div>
+                <small>STRENGTH</small>
+                <h3>Kraftentwicklung</h3>
+            </div>
+
+        </div>
+
+
+        <label class="exercise-select-label">
+
+            Übung auswählen
+
+            <select id="strengthExerciseSelect">
+            </select>
+
+        </label>
+
+
+        <div
+            id="strengthChart"
+            class="chart">
+        </div>
+
+    </section>
+
+</section>
+
+
+
+<!-- ============================= -->
+<!-- VERLAUF -->
+<!-- ============================= -->
+
+<section id="historyPage" class="page">
+
+    <h2>Trainingsverlauf</h2>
+
+    <p>
+        Alle dokumentierten Einheiten.
+    </p>
+
+    <div id="historyContainer"></div>
+
+</section>
+
+</main>
+
+
+
+<!-- ============================= -->
+<!-- TRAINING MODAL -->
+<!-- ============================= -->
+
+<div id="trainingModal" class="modal">
+
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <div>
+
+            <small id="modalType"></small>
+
+            <h2 id="modalTitle"></h2>
+
+        </div>
+
+        <button
+            id="closeModal"
+            class="close-button">
+            ×
+        </button>
+
+    </div>
+
+
+    <div id="plannedTraining"></div>
+
+
+    <form id="trainingForm">
+
+
+        <!-- LAUF -->
+
+        <div id="runningFields">
+
+            <div class="form-group">
+
+                <label for="distance">
+                    Distanz (km)
+                </label>
+
+                <input
+                    id="distance"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="z. B. 6.2">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="duration">
+                    Zeit
+                </label>
+
+                <input
+                    id="duration"
+                    type="text"
+                    placeholder="z. B. 39:20">
+
+            </div>
+
+
+            <div
+                id="paceBox"
+                class="pace-box">
+
+                Ø Pace: –
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GYM -->
+
+        <div id="gymFields"></div>
+
+
+
+        <!-- BELASTUNG -->
+
+        <div class="form-group">
+
+            <label>
+                Subjektive Belastung
+            </label>
+
+            <div class="range-line">
+
+                <span>1</span>
+
+                <input
+                    id="effort"
+                    type="range"
+                    min="1"
+                    max="10"
+                    value="5">
+
+                <span>10</span>
+
+                <span
+                    id="effortValue"
+                    class="range-value">
+                    5/10
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- KNIESCHMERZ -->
+
+        <div class="form-group">
+
+            <label>
+                Knieschmerz während des Trainings
+            </label>
+
+            <div class="range-line">
+
+                <span>0</span>
+
+                <input
+                    id="painDuring"
+                    type="range"
+                    min="0"
+                    max="10"
+                    value="0">
+
+                <span>10</span>
+
+                <span
+                    id="painDuringValue"
+                    class="range-value">
+                    0/10
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Knieschmerz nach dem Training
+            </label>
+
+            <div class="range-line">
+
+                <span>0</span>
+
+                <input
+                    id="painAfter"
+                    type="range"
+                    min="0"
+                    max="10"
+                    value="0">
+
+                <span>10</span>
+
+                <span
+                    id="painAfterValue"
+                    class="range-value">
+                    0/10
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="notes">
+                Notizen
+            </label>
+
+            <textarea
+                id="notes"
+                placeholder="Wie hat sich das Training angefühlt?">
+            </textarea>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="action-button">
+
+            Training speichern
+
+        </button>
+
+        <button
+            type="button"
+            id="deleteTrainingButton"
+            class="delete-button">
+
+            Training löschen
+
+        </button>
+    </form>
+
+</div>
+
+</div>
+
+
+
+<footer>
+    Return to Sport Training
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
